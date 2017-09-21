@@ -1,8 +1,4 @@
-
 // JSON.parse(x)
-
-
-
 function send_message_to_server() {
 	let text = document.querySelector('textarea');
 	if (text.value.length > 0) { // Prevent submitting blank input
@@ -33,11 +29,9 @@ function enterControl(e) {
 function get_message() {
 	fetch('http://127.0.0.1:5000/room', {method: 'get'})
 	.then(response => response.json())
-	// .then(e => console.log(e)) // display messages 
 	.then(e => display_messages(e)) // display messages 
 	.catch(e => console.log("you suck", e));
 }
-
 
 //post messages to server
 function post_message(msg) {
@@ -50,36 +44,6 @@ function post_message(msg) {
 			msg_key: msg
 		})});
 }
-
-
-
-
-	
-const sqlite3 = require('sqlite3').verbose();
-let db = new sqlite3.Database(':memory:');
-
-let db = new sqlite3.Database(':memory:', (err) => {
-  if (err) {
-    return console.error(err.message);
-  }
-  console.log('Connected to the in-memory SQlite database.');
-});
-
-db.close();
-
-db.close((err) => {
-  if (err) {
-    return console.error(err.message);
-  }
-  console.log('Close the database connection.');
-});
-
-
-
-
-
-
-
 
 document.onkeydown = enterControl;
 setInterval(get_message, 1000);
